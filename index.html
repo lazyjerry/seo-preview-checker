@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>SEO 與社群媒體預覽檢查工具</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+		<!-- 外部 CSS -->
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body class="bg-gray-50 min-h-screen">
+		<div class="container mx-auto px-4 py-8">
+			<div class="text-center mb-12">
+				<h1 class="text-4xl font-bold text-gray-800 mb-4">SEO 與社群媒體預覽檢查工具</h1>
+				<p class="text-lg text-gray-600 max-w-2xl mx-auto">
+					分析任何網頁的 SEO 設定，並查看其在社群媒體平台分享時的顯示效果。
+				</p>
+			</div>
+
+			<div class="bg-white rounded-xl shadow-lg p-6 mb-8 max-w-4xl mx-auto">
+				<div class="flex flex-col md:flex-row gap-4">
+					<input
+						type="url"
+						id="urlInput"
+						placeholder="輸入網址 (例如：https://example.com)"
+						class="flex-grow px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+					/>
+					<button
+						id="analyzeBtn"
+						class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 flex items-center justify-center"
+					>
+						<span id="btnText">分析</span>
+						<div id="loadingSpinner" class="loading-spinner ml-2 hidden"></div>
+					</button>
+				</div>
+			</div>
+
+			<div id="resultsContainer" class="hidden">
+				<!-- SEO 分數 -->
+				<div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+					<div class="flex flex-col md:flex-row items-center justify-between mb-6">
+						<h2 class="text-2xl font-bold text-gray-800">SEO 分析結果</h2>
+						<div class="relative w-24 h-24 mt-4 md:mt-0">
+							<svg class="w-full h-full" viewBox="0 0 100 100">
+								<circle
+									class="text-gray-200"
+									stroke-width="8"
+									stroke="currentColor"
+									fill="transparent"
+									r="40"
+									cx="50"
+									cy="50"
+								/>
+								<circle
+									id="scoreCircle"
+									class="text-green-500"
+									stroke-width="8"
+									stroke-linecap="round"
+									stroke="currentColor"
+									fill="transparent"
+									r="40"
+									cx="50"
+									cy="50"
+									stroke-dasharray="251.2"
+									stroke-dashoffset="251.2"
+								/>
+							</svg>
+							<div class="absolute inset-0 flex items-center justify-center">
+								<span id="scoreValue" class="text-3xl font-bold text-gray-800">0</span>
+							</div>
+						</div>
+					</div>
+
+					<div id="seoDetails" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+						<!-- 由 JavaScript 填充 -->
+					</div>
+				</div>
+
+				<!-- 社群媒體預覽 -->
+				<div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+					<h2 class="text-2xl font-bold text-gray-800 mb-6">社群媒體預覽</h2>
+
+					<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+						<!-- Facebook 預覽 -->
+						<div class="social-card bg-white border border-gray-200 rounded-lg overflow-hidden">
+							<div class="bg-blue-600 text-white p-3 flex items-center">
+								<i class="fab fa-facebook-f mr-2"></i>
+								<span class="font-medium">Facebook</span>
+							</div>
+							<div class="p-4">
+								<div id="facebookPreview" class="border border-gray-200 rounded">
+									<div id="facebookImage" class="bg-gray-100 h-40 flex items-center justify-center text-gray-400">
+										<i class="fas fa-image text-3xl"></i>
+									</div>
+									<div class="p-3">
+										<div id="facebookSite" class="text-xs text-gray-500 mb-1"></div>
+										<div id="facebookTitle" class="font-bold text-sm mb-1 line-clamp-2"></div>
+										<div id="facebookDescription" class="text-xs text-gray-600 line-clamp-2"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Twitter 預覽 -->
+						<div class="social-card bg-white border border-gray-200 rounded-lg overflow-hidden">
+							<div class="bg-blue-400 text-white p-3 flex items-center">
+								<i class="fab fa-twitter mr-2"></i>
+								<span class="font-medium">Twitter</span>
+							</div>
+							<div class="p-4">
+								<div id="twitterPreview" class="border border-gray-200 rounded">
+									<div id="twitterImage" class="bg-gray-100 h-40 flex items-center justify-center text-gray-400">
+										<i class="fas fa-image text-3xl"></i>
+									</div>
+									<div class="p-3">
+										<div id="twitterSite" class="text-xs text-gray-500 mb-1"></div>
+										<div id="twitterTitle" class="font-bold text-sm mb-1 line-clamp-2"></div>
+										<div id="twitterDescription" class="text-xs text-gray-600 line-clamp-2"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- LinkedIn 預覽 -->
+						<div class="social-card bg-white border border-gray-200 rounded-lg overflow-hidden">
+							<div class="bg-blue-700 text-white p-3 flex items-center">
+								<i class="fab fa-linkedin-in mr-2"></i>
+								<span class="font-medium">LinkedIn</span>
+							</div>
+							<div class="p-4">
+								<div id="linkedinPreview" class="border border-gray-200 rounded">
+									<div id="linkedinImage" class="bg-gray-100 h-40 flex items-center justify-center text-gray-400">
+										<i class="fas fa-image text-3xl"></i>
+									</div>
+									<div class="p-3">
+										<div id="linkedinSite" class="text-xs text-gray-500 mb-1"></div>
+										<div id="linkedinTitle" class="font-bold text-sm mb-1 line-clamp-2"></div>
+										<div id="linkedinDescription" class="text-xs text-gray-600 line-clamp-2"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- 原始 Meta 標籤 -->
+				<div class="bg-white rounded-xl shadow-lg p-6">
+					<h2 class="text-2xl font-bold text-gray-800 mb-6">偵測到的 Meta 標籤</h2>
+					<div class="bg-gray-50 rounded-lg p-4 overflow-x-auto">
+						<pre id="metaTags" class="text-sm text-gray-800 whitespace-pre-wrap"></pre>
+					</div>
+				</div>
+			</div>
+
+			<div id="errorContainer" class="hidden bg-red-50 border-l-4 border-red-500 p-4 mb-8 rounded">
+				<div class="flex">
+					<div class="flex-shrink-0">
+						<i class="fas fa-exclamation-circle text-red-500 mt-1 mr-3"></i>
+					</div>
+					<div>
+						<h3 class="text-sm font-medium text-red-800" id="errorTitle">錯誤</h3>
+						<div class="mt-2 text-sm text-red-700" id="errorMessage">
+							<p>分析網址時發生錯誤。請檢查網址後重試。</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<footer class="bg-gray-100 py-8 mt-12">
+			<div class="container mx-auto px-4 text-center text-gray-600">
+				<p>© 2023 SEO 與社群媒體預覽檢查工具。保留所有權利。</p>
+			</div>
+		</footer>
+
+		<!-- 外部 JS -->
+		<script src="script.js"></script>
+	</body>
+</html>
