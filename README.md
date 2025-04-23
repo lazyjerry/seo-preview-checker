@@ -2,6 +2,10 @@
 
 ⚡️ 一個前端純靜態的工具，可即時分析任意網頁的 SEO 設定，並模擬 Facebook、Twitter、LinkedIn 等社群平台的分享預覽。
 
+## 線上 Demo
+
+- **Demo 網址**: https://seo-preview-and-checker.pages.dev/
+
 ## 功能特色
 
 - **即時抓取並解析**：使用 `fetch` 取得目標網頁 HTML，通過 `DOMParser` 解析 `<title>`、`<meta>`、Open Graph 與 Twitter 卡片等標籤。
@@ -24,14 +28,18 @@
    git clone https://github.com/lazyjerry/seo-preview-checker.git
    cd seo-social-preview-tool
    ```
-2. 打開 `index.html`：
 
+git clone [https://github.com/lazyjerry/seo-preview-checker.git](https://github.com/lazyjerry/seo-preview-checker.git)
+cd seo-social-preview-tool
+
+````
+2. 打開 `index.html`：
    - 直接在瀏覽器中開啟（Chrome、Firefox 等）。
    - 若遇到 CORS 限制，可透過本機靜態伺服器(如 `http-server`)執行：
      ```bash
-     npm install -g http-server
-     http-server . -c-1
-     ```
+npm install -g http-server
+http-server . -c-1
+````
 
 3. 在輸入框填入欲分析的網址，按下「分析」按鈕，即可看到 SEO 分數與社群預覽效果。
 
