@@ -25,14 +25,13 @@
    cd seo-social-preview-tool
    ```
 2. 打開 `index.html`：
+
    - 直接在瀏覽器中開啟（Chrome、Firefox 等）。
    - 若遇到 CORS 限制，可透過本機靜態伺服器(如 `http-server`)執行：
      ```bash
      npm install -g http-server
      http-server . -c-1
      ```
-
-```
 
 3. 在輸入框填入欲分析的網址，按下「分析」按鈕，即可看到 SEO 分數與社群預覽效果。
 
@@ -54,5 +53,4 @@
 
 ---
 
-> 若有問題或建議，請在 [Issues](https://github.com/lazyjerry/seo-preview-checker/issues) 提交或聯絡作者：[lazyjerry@example.com](mailto\:lazyjerry@example.com)。
-```
+> 若有問題或建議，請在 [Issues](https://github.com/lazyjerry/seo-preview-checker/issues) 提交或聯絡作者。
