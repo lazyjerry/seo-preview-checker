@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const analyzeBtn = document.getElementById("analyzeBtn");
   const urlInput = document.getElementById("urlInput");
   const resultsContainer = document.getElementById("resultsContainer");
+  const description = document.getElementById("description");
   const errorContainer = document.getElementById("errorContainer");
   const loadingSpinner = document.getElementById("loadingSpinner");
   const btnText = document.getElementById("btnText");
@@ -52,6 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
     btnText.textContent = "分析中...";
     analyzeBtn.disabled = true;
     resultsContainer.classList.add("hidden");
+    description.classList.remove("hidden");
     errorContainer.classList.add("hidden");
 
     try {
@@ -100,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // 4. 檢查項目
     const checks = [
       {
-        title: "標題標籤",
+        title: "標題標籤 title",
         value: meta.title,
         valid: !!meta.title,
         recommendation: !meta.title
@@ -112,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
           : "長度適當",
       },
       {
-        title: "Meta 描述",
+        title: "Meta 描述 description",
         value: meta.description,
         valid: !!meta.description,
         recommendation: !meta.description
@@ -124,13 +126,13 @@ document.addEventListener("DOMContentLoaded", function () {
           : "長度適當",
       },
       {
-        title: "Open Graph 標籤",
-        value: meta["og:title"] ? "存在" : "缺少",
+        title: "Open Graph 標籤 og:title / description / image",
+        value: meta["og:title"] ? "存在" : ( (meta["og:title"] && meta["og:description"] && meta["og:image"]) ? "部分缺少": "缺少"),
         valid: meta["og:title"] && meta["og:description"] && meta["og:image"],
         recommendation: "社群分享必備",
       },
       {
-        title: "Twitter 卡片標籤",
+        title: "Twitter 卡片標籤 twitter:title / description / image",
         value: meta["twitter:card"] ? "存在" : "缺少",
         valid:
           meta["twitter:card"] &&
@@ -139,13 +141,13 @@ document.addEventListener("DOMContentLoaded", function () {
         recommendation: "Twitter 分享重要標籤",
       },
       {
-        title: "行動裝置友善",
+        title: "行動裝置友善 viewport",
         value: meta.viewport ? "響應式" : "缺少",
         valid: !!meta.viewport,
         recommendation: "確保設置 viewport meta 標籤",
       },
       {
-        title: "標準網址",
+        title: "標準網址 canonical",
         value: meta.canonical ? "存在" : "缺少",
         valid: !!meta.canonical,
         recommendation: "有助於防止重複內容問題",
@@ -224,8 +226,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 顯示原始 meta 標籤
     metaTags.textContent = JSON.stringify(data.metaTags, null, 2);
-
+    description.classList.add("hidden");
     resultsContainer.classList.remove("hidden");
+
   }
 
   function updateSocialPreview(preview, data) {

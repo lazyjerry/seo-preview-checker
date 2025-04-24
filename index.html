@@ -36,6 +36,218 @@
 				</div>
 			</div>
 
+			<!-- 一開始說明 -->
+			<div id="description">
+				<style>
+					#description {
+						font-family: "Helvetica Neue", Arial, sans-serif;
+						line-height: 1.6;
+						color: #333;
+					}
+					#description .section {
+						margin-bottom: 1.5rem;
+						padding: 1rem;
+						background: #fafafa;
+						border-left: 4px solid #4caf50;
+						border-radius: 4px;
+					}
+					#description .section h4 {
+						margin: 0 0 0.5rem;
+						font-size: 1.125rem;
+						color: #2e7d32;
+					}
+					#description .section p {
+						margin: 0 0 0.75rem;
+					}
+					#description pre {
+						background: #272822;
+						color: #f8f8f2;
+						padding: 0.75rem;
+						overflow-x: auto;
+						border-radius: 4px;
+						font-size: 0 ninerem;
+					}
+					#description code {
+						font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+						background: rgba(27, 31, 35, 0.05);
+						padding: 0.2em 0.4em;
+						border-radius: 3px;
+					}
+					#description ul {
+						margin: 0.5rem 0 0;
+						padding-left: 1.2rem;
+					}
+					#description li {
+						margin-bottom: 0.4rem;
+					}
+				</style>
+
+				<div class="section">
+					<h4>1. 基本 SEO 預覽 Meta（搜尋引擎）</h4>
+					<p>搜尋結果主要依賴以下標籤──</p>
+					<pre>
+			&lt;title&gt;網頁標題，建議 50–60 字元內&lt;/title&gt;
+			&lt;meta name="description" content="簡短描述，建議 120–160 字元內"&gt;
+			&lt;meta name="robots" content="index, follow"&gt;
+					</pre
+					>
+					<ul>
+						<li>
+							<code>&lt;title&gt;</code>
+							：搜尋結果標題，長度過長會被截斷。
+						</li>
+						<li>
+							<code>&lt;meta name="description"&gt;</code>
+							：搜尋結果下方的摘要文字。
+						</li>
+						<li>
+							<code>&lt;meta name="robots"&gt;</code>
+							：控制頁面是否允許被索引／追蹤。
+						</li>
+					</ul>
+				</div>
+
+				<div class="section">
+					<h4>2. Open Graph Protocol（Facebook、LinkedIn、LINE 等）</h4>
+					<p>Open Graph（OG）由 Facebook 發起，幾乎所有社群平台都支援：</p>
+					<pre>
+			&lt;meta property="og:title"        content="文章／頁面標題"&gt;
+			&lt;meta property="og:description"  content="社群分享時的摘要文字"&gt;
+			&lt;meta property="og:image"        content="https://example.com/image.jpg"&gt;
+			&lt;meta property="og:url"          content="https://example.com/page.html"&gt;
+			&lt;meta property="og:type"         content="website"&gt;
+			&lt;meta property="og:site_name"    content="網站名稱"&gt;
+			&lt;meta property="og:image:width"  content="1200"&gt;
+			&lt;meta property="og:image:height" content="630"&gt;
+					</pre
+					>
+					<ul>
+						<li>
+							<code>og:title／og:description</code>
+							：分享卡片的標題與說明。
+						</li>
+						<li>
+							<code>og:image</code>
+							：建議至少 1200×630 px，比例 1.91:1。
+						</li>
+						<li>
+							<code>og:type</code>
+							：指定內容類型（例如
+							<code>article</code>
+							、
+							<code>video.movie</code>
+							）。
+						</li>
+					</ul>
+				</div>
+
+				<div class="section">
+					<h4>3. Twitter Cards（Twitter）</h4>
+					<pre>
+			&lt;meta name="twitter:card"        content="summary_large_image"&gt;
+			&lt;meta name="twitter:title"       content="推文標題"&gt;
+			&lt;meta name="twitter:description" content="推文摘要"&gt;
+			&lt;meta name="twitter:image"       content="https://example.com/twitter-image.jpg"&gt;
+			&lt;meta name="twitter:site"        content="@你的官方帳號"&gt;
+			&lt;meta name="twitter:creator"     content="@作者或發佈者"&gt;
+					</pre
+					>
+					<ul>
+						<li>
+							<code>twitter:card</code>
+							：
+							<code>summary</code>
+							或
+							<code>summary_large_image</code>
+							。
+						</li>
+						<li>
+							<code>twitter:site</code>
+							/
+							<code>twitter:creator</code>
+							：分別對應網站與作者的官方帳號。
+						</li>
+					</ul>
+				</div>
+
+				<div class="section">
+					<h4>4. Schema.org 結構化資料（Rich Results）</h4>
+					<pre>
+			&lt;script type="application/ld+json"&gt;
+			{
+				"@context": "https://schema.org",
+				"@type": "Article",
+				"headline": "文章標題",
+				"description": "文章摘要",
+				"image": ["https://example.com/image1.jpg"],
+				"author": {
+					"@type": "Person",
+					"name": "作者姓名"
+				},
+				"publisher": {
+					"@type": "Organization",
+					"name": "網站名稱",
+					"logo": {
+						"@type": "ImageObject",
+						"url": "https://example.com/logo.png"
+					}
+				},
+				"datePublished": "2025-04-24T08:00:00+08:00"
+			}
+			&lt;/script&gt;
+					</pre
+					>
+					<ul>
+						<li>
+							<code>@type</code>
+							可為
+							<code>Article</code>
+							、
+							<code>Product</code>
+							、
+							<code>Event</code>
+							等。
+						</li>
+						<li>豐富結果可顯示星級評分、商品價格、活動時間等。</li>
+					</ul>
+				</div>
+
+				<div class="section">
+					<h4>5. 其他常見平台支援</h4>
+					<ul>
+						<li>Slack / WhatsApp：多數採用 Open Graph。</li>
+						<li>
+							Pinterest：支援
+							<code>og:image</code>
+							及
+							<code>pin:media</code>
+							等專屬標籤。
+						</li>
+						<li>
+							WeChat（微信）：也會讀取 OG，但建議同時提供
+							<code>&lt;meta name="description"&gt;</code>
+							。
+						</li>
+					</ul>
+				</div>
+
+				<div class="section">
+					<h4>小結</h4>
+					<ul>
+						<li>
+							搜尋引擎：
+							<code>&lt;title&gt;</code>
+							、
+							<code>&lt;meta name="description"&gt;</code>
+							、結構化 JSON-LD
+						</li>
+						<li>Facebook/LinkedIn/LINE：Open Graph</li>
+						<li>Twitter：Twitter Cards</li>
+						<li>Rich Snippets：Schema.org JSON-LD</li>
+					</ul>
+				</div>
+			</div>
+
 			<div id="resultsContainer" class="hidden">
 				<!-- SEO 分數 -->
 				<div class="bg-white rounded-xl shadow-lg p-6 mb-8">
@@ -86,7 +298,7 @@
 						<div class="social-card bg-white border border-gray-200 rounded-lg overflow-hidden">
 							<div class="bg-blue-600 text-white p-3 flex items-center">
 								<i class="fab fa-facebook-f mr-2"></i>
-								<span class="font-medium">FB/Pinterest/LINE/WhatsApp/Telegram</span>
+								<span class="font-medium">FB</span>
 							</div>
 							<div class="p-4">
 								<div id="facebookPreview" class="border border-gray-200 rounded">
